@@ -54,7 +54,6 @@ namespace eclipse::gui::imgui {
             case 0:
                 // Render windows once, to get the correct size
                 ImGui::GetStyle().Alpha = 0.f;
-                ImGui::GetStyle().WindowShadowSize = 0.f;
                 for (auto &window: m_windows) {
                     window.draw();
                 }
