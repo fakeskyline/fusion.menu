@@ -1,3 +1,4 @@
+# Trigger build after enabling GitHub Actions.
 name: Build Fusion
 
 on:
