@@ -1,119 +1,49 @@
 <div align="center">
-   <a href="https://github.com/EclipseMenu/EclipseMenu">
-      <img src="logo.png" alt="Logo" width="120" height="120">
-   </a>
-   <h1 align="center">Eclipse</h1>
-   <p align="center">
-      A next-generation mod menu for Geometry Dash.
-   </p>
+  <h1>Fusion</h1>
+  <p>A next-generation mod menu for Geometry Dash.</p>
+  <p><strong>Fork of Eclipse Menu · Geometry Dash 2.2091 · Geode v6</strong></p>
 </div>
-<div align="center">
-    <a href="https://github.com/EclipseMenu/EclipseMenu/latest">
-          <img src="https://img.shields.io/github/v/release/EclipseMenu/EclipseMenu" alt="Release version">
-    </a>
-    <img src="https://img.shields.io/github/downloads/EclipseMenu/EclipseMenu/total" alt="Total downloads">
-    <img src="https://img.shields.io/github/downloads/EclipseMenu/EclipseMenu/latest/total" alt="Latest release downloads">
-    <a href="LICENSE.md">
-      <img src="https://img.shields.io/github/license/EclipseMenu/EclipseMenu" alt="License">
-    </a>
-    <a href="https://github.com/EclipseMenu/EclipseMenu/issues">
-      <img src="https://img.shields.io/github/issues/EclipseMenu/EclipseMenu" alt="Issues">
-    </a>
-    <a href="https://discord.gg/NnpwFRDMND">
-      <img src="https://img.shields.io/discord/1256092297829945414?label=discord&logo=discord" alt="Discord">
-    </a>
-</div>
-<br>
 
-## Tabbed Style
+Fusion is an open-source Geometry Dash mod menu based on [Eclipse Menu](https://github.com/EclipseMenu/EclipseMenu). It retains the upstream feature set and architecture while developing under the Fusion name.
 
-<img src="screenshots/tabbed1.jpg" alt="Tabbed Style">
-<img src="screenshots/tabbed2.jpg" alt="Tabbed Style">
-
-## Cocos UI
-
-<img src="screenshots/cocos1.jpg" alt="Cocos Style">
-
-## Panel Style
-
-<img src="screenshots/panel1.jpg" alt="Panel Style">
-
-## Sidebar Style
-
-<img src="screenshots/sidebar1.jpg" alt="Sidebar Style">
-
-## How to install
-
-1. Install [Geode](https://geode-sdk.org) if you haven't already!
-2. Open Geometry Dash
-3. Click on the Geode button
-4. Navigate to the **Download** tab, and search "Eclipse"
-5. Click on **View**, and **Download**. You should now have **Eclipse Menu** after restarting!
-
-## How to use
-
-1. On PC, press `TAB` to open and close the mod menu.
-2. Set or toggle any hack / mod you want to use.
-3. For any questions or general support, join our [Support Discord Server](https://discord.gg/NnpwFRDMND)!
-4. Have fun using our mod!
+> **Compatibility status:** The 2.2091 port targets the Geode v6.0.0-alpha.1 SDK. Geode v6 is an experimental developer release, so this branch is experimental too. A successful build does not by itself guarantee runtime stability.
 
 ## Features
 
-- 100+ hacks
-- StartPos Switcher (with Smart SmartPos!)
-- Fully Customizable Labels
-- Show Trajectory
-- Internal Recorder (requires [FFmpeg API](https://geode-sdk.org/mods/eclipse.ffmpeg-api) mod to be installed)
-- Replay Bot
-- Keybinds
-- Theme Customizability (you can theme Eclipse Menu however you want!)
-- Crossplatform support (Windows, macOS, Android, iOS)
-- Community Translations (check the [translations repository](https://github.com/EclipseMenu/translations) on how to
-  contribute)
-- An API for other mods to interact with Eclipse
+- 100+ gameplay, creator, visual and utility options inherited from Eclipse
+- StartPos Switcher with Smart StartPos
+- Show Hitboxes and Show Trajectory
+- Internal Recorder and Replay Bot
+- Customizable labels, keybinds and themes
+- Tabbed, Panel and Sidebar layouts
+- Windows, macOS, Android and iOS build targets
 
-## Build Instructions
+The Internal Recorder requires the optional [FFmpeg API](https://geode-sdk.org/mods/eclipse.ffmpeg-api) mod.
 
-1. You must have the following: `CMake`, `MSVC / Clang`, `Git`, `Geode CLI`, `Geode SDK`
+## Build
+
+The GitHub Actions workflow builds Fusion for Windows, macOS, Android32, Android64 and iOS using the Geode SDK version declared in `mod.json`.
+
+For a local build, install CMake, a C++23 compiler, Git, Geode CLI and the matching Geode SDK, then run:
 
 ```bash
-git clone https://github.com/EclipseMenu/EclipseMenu
-cd EclipseMenu
 cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 cmake --build build --config RelWithDebInfo
 ```
 
-## Credits
+## Upstream and credits
 
-This mod menu would not be possible without the developers from other mod menus teaming up together!
+Fusion is derived from [Eclipse Menu](https://github.com/EclipseMenu/EclipseMenu). The original Eclipse developers and contributors retain credit for their work:
 
-- [ninXout](https://github.com/ninXout) ([Crystal Client](https://github.com/ninXout/Crystal-Client))
-- [prevter](https://github.com/prevter) ([OpenHack](https://github.com/prevter/OpenHack))
-- [maxnut](https://github.com/maxnut) ([GD Mega Overlay](https://github.com/maxnut/GDMegaOverlay))
-- [Firee](https://github.com/FireMario211) ([Prism Menu](https://github.com/FireMario211/Prism-Menu))
+- [ninXout](https://github.com/ninXout)
+- [prevter](https://github.com/prevter)
+- [maxnut](https://github.com/maxnut)
+- [Firee](https://github.com/FireMario211)
 - [SpaghettDev](https://github.com/SpaghettDev)
+- [Eclipse Menu contributors](https://github.com/EclipseMenu/EclipseMenu/graphs/contributors)
 
-Additionally, thank you to our testers, contributors, and supporters for improving and helping make Eclipse Menu
-possible!
-
-- [Tallen](https://tallensuired.carrd.co/) - Tester & Helped support **Eclipse Menu** by donating!
-- [hiimjasmine00](https://github.com/hiimjasmine00) - Contributor
-- [RayDeeUx](https://github.com/RayDeeUx) - Contributor
-- [iAndyHD3](https://github.com/iAndyHD3) - Contributor
-- [Tech](https://github.com/TechStudent11) - Contributor
-- [Uproxide](https://github.com/Uproxide) - Contributor
-- [slideglide](https://github.com/slideglide) - Contributor
-- [alk](https://github.com/altalk23) - Contributor
-- [Beat](https://github.com/BeatACVR) - Contributor
-- [alex](https://www.youtube.com/channel/UC4SWcPASJplMrIT6YI8QcSw) - Tester
-- [itsmeatomic](https://youtube.com/@itsmeatomic) - Tester
-- [jettjames](https://x.com/JettJamez) - Tester
-- [doki](https://www.youtube.com/@dokitachi) - Tester
-- [Prometheus](https://github.com/Prometheus-03) - Tester
-- [Catto](https://github.com/CattoDev/GatoBot/) - ShaderLayer fix for renderer
-- [arvFlash](https://github.com/arvFlash) - Catppuccin Macchiato theme
+Additional upstream contributors and testers are credited in the original project history and documentation.
 
 ## License
 
-**Eclipse Menu** is created under the **[Eclipse Public License v2.0](https://choosealicense.com/licenses/epl-2.0/)**,
-read more by clicking on the highlighted name.
+Fusion retains the upstream **Eclipse Public License 2.0**. See [LICENSE.md](LICENSE.md) for the complete license terms.

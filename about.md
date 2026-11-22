@@ -1,70 +1,38 @@
-# Eclipse Menu
+# Fusion
 
-A **next-generation** mod menu for Geometry Dash.
+A **next-generation** mod menu for Geometry Dash, forked from Eclipse Menu.
+
+## Compatibility
+
+- Geometry Dash: **2.2091**
+- Geode SDK: **6.0.0-alpha.1**
+- Status: experimental developer build
+
+Geode v6 is an alpha release. Runtime compatibility and feature behavior must be validated on the target game before this fork can be considered stable.
 
 ## How to use
 
-1. On PC, press `TAB` to open and close the mod menu. For mobile, you should see a ball, click on that to open or close
-   the menu!
-2. Set or toggle any hack / mod you want to use.
-3. For any questions or general support, join our [Support Discord Server](https://discord.gg/NnpwFRDMND)!
-4. Have fun using our mod!
+1. Install a Geode v6 build compatible with Geometry Dash 2.2091.
+2. Install the Fusion `.geode` package and restart Geometry Dash.
+3. Open the Fusion menu using the configured keybind on desktop or the floating button on mobile.
+4. Enable the options you need.
 
 ## Features
 
-- 100+ hacks
-- StartPos Switcher (with Smart SmartPos!)
-- Fully Customizable Labels
-- Show Trajectory
-- Internal Recorder
-- Replay Bot
-- Keybinds
-- Theme Customizability (you can theme Eclipse Menu however you want!)
-- Crossplatform support (Windows, macOS, Android, iOS)
-- Community Translations (check the [translations repository](https://github.com/EclipseMenu/translations) on how to
-  contribute)
-- An API for other mods to interact with Eclipse
+- 100+ gameplay, creator, visual and utility options
+- StartPos Switcher with Smart StartPos
+- Show Hitboxes and Show Trajectory
+- Internal Recorder and Replay Bot
+- Keybinds, customizable labels and themes
+- Tabbed, Panel and Sidebar layouts
+- Windows, macOS, Android and iOS build targets
 
-Note: Internal Recorder requires FFmpeg API mod to be installed and enabled:
+The Internal Recorder requires the optional `eclipse.ffmpeg-api` dependency.
 
-<mod:eclipse.ffmpeg-api>
+## Upstream credits
 
-## Credits
-
-This mod menu would not be possible without the developers from other mod menus teaming up together!
-
-- [ninXout](https://github.com/ninXout) ([Crystal Client](https://github.com/ninXout/Crystal-Client))
-- [prevter](https://github.com/Prevter) ([OpenHack](https://github.com/Prevter/OpenHack))
-- [maxnut](https://github.com/maxnut) ([GD Mega Overlay](https://github.com/maxnut/GDMegaOverlay))
-- [Firee](https://github.com/FireMario211) ([Prism Menu](https://github.com/FireMario211/Prism-Menu))
-- [SpaghettDev](https://github.com/SpaghettDev)
-
-Additionally, thank you to our testers, contributors, and supporters for improving and helping make Eclipse Menu
-possible!
-
-- [Tallen](https://tallensuired.carrd.co/) - Tester, First Donor, and awesome person!
-- [hiimjasmine00](https://github.com/hiimjasmine00) - Contributor
-- [RayDeeUx](https://github.com/RayDeeUx) - Contributor
-- [iAndyHD3](https://github.com/iAndyHD3) - Contributor
-- [Tech](https://github.com/TechStudent11) - Contributor
-- [Uproxide](https://github.com/Uproxide) - Contributor
-- [slideglide](https://github.com/slideglide) - Contributor
-- [alk](https://github.com/altalk23) - Contributor
-- [Beat](https://github.com/BeatACVR) - Contributor
-- [alex](https://www.youtube.com/channel/UC4SWcPASJplMrIT6YI8QcSw) - Tester
-- [itsmeatomic](https://youtube.com/@itsmeatomic) - Tester
-- [jettjames](https://x.com/JettJamez) - Tester
-- [doki](https://www.youtube.com/@dokitachi) - Tester
-- [Prometheus](https://github.com/Prometheus-03) - Tester
-- [Catto](https://github.com/CattoDev/GatoBot/) - ShaderLayer fix for renderer
-- [arvFlash](https://github.com/arvFlash) - Catppuccin Macchiato theme
+Fusion is based on [Eclipse Menu](https://github.com/EclipseMenu/EclipseMenu). Original developers and contributors include ninXout, prevter, maxnut, Firee, SpaghettDev and the wider Eclipse contributor community. Their upstream contributions remain credited.
 
 ## License
 
-**Eclipse Menu** is created under the **[Eclipse Public License v2.0](https://choosealicense.com/licenses/epl-2.0/)**,
-read more by clicking on the highlighted name.
-
-## Other notes
-
-Send any suggestions or report any issues to the **Github Repository** or our **Discord Server**. We hope you enjoy
-using this mod!
+This project retains the **Eclipse Public License 2.0**. See [LICENSE.md](LICENSE.md).

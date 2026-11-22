@@ -1,4 +1,6 @@
-# Eclipse Menu
+# Fusion Changelog
+
+Fusion begins as a fork of Eclipse Menu v1.8.3. Historical entries below describe upstream Eclipse releases and are retained for attribution and feature history.
 
 ## v1.8.3
 **Fixes**:
