@@ -39,7 +39,7 @@ namespace eclipse::i18n {
 
     static std::string stringExtension(std::filesystem::path const& filename) {
         // turns "en_US.lang.json" into "en_US"
-        auto filenameStr = geode::utils::string::pathToString(filename);
+        auto filenameStr = asp::fs::Path::fromStdPath(filename).string();
         auto pos = filenameStr.find_first_of('.');
         return filenameStr.substr(0, pos);
     }
@@ -160,8 +160,8 @@ namespace eclipse::i18n {
     }
 
     std::vector<LanguageMetadata> fetchAvailableLanguages() {
-        static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
-        static auto fallbackPath = geode::Mod::get()->getResourcesDir().toStdPath();
+        static auto langsPath = std::filesystem::path(geode::Mod::get()->getSaveDir().string()) / "languages";
+        static auto fallbackPath = std::filesystem::path(geode::Mod::get()->getResourcesDir().string());
 
         std::vector<LanguageMetadata> result;
         auto globLangs = [&](std::filesystem::path const& path) {
@@ -172,7 +172,7 @@ namespace eclipse::i18n {
                 return;
             }
             for (auto& entry : std::filesystem::directory_iterator(path, ec)) {
-                auto filename = geode::utils::string::pathToString(entry.path().filename());
+                auto filename = asp::fs::Path::fromStdPath(entry.path().filename()).string();
                 if (filename.size() < 10 || filename.substr(filename.size() - 10) != ".lang.json") continue;
 
                 auto code = filename.substr(0, filename.size() - 10);
@@ -200,7 +200,7 @@ namespace eclipse::i18n {
     bool hasBitmapFont(std::string_view font) {
         if (font == "default") return true;
 
-        static auto fontsPath = geode::Mod::get()->getConfigDir().toStdPath() / "bmfonts" / GEODE_MOD_ID;
+        static auto fontsPath = std::filesystem::path(geode::Mod::get()->getConfigDir().string()) / "bmfonts" / GEODE_MOD_ID;
         std::error_code ec;
         if (!std::filesystem::exists(fontsPath, ec))
             return false;
@@ -212,12 +212,12 @@ namespace eclipse::i18n {
     }
 
     void downloadLanguage(std::string code) {
-        static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
+        static auto langsPath = std::filesystem::path(geode::Mod::get()->getSaveDir().string()) / "languages";
 
         using namespace geode::utils;
         geode::async::runtime().spawn([](std::string code) -> arc::Future<> {
             auto res = co_await web::WebRequest()
-                .get(fmt::format("https://raw.githubusercontent.com/EclipseMenu/translations/refs/heads/main/translations/{}.lang.json", code));
+                .get(fmt::format("https://git.eclipse.menu/EclipseMenu/translations/raw/branch/main/translations/{}.lang.json", code));
 
             if (!res.ok()) {
                 co_return;
@@ -290,7 +290,7 @@ namespace eclipse::i18n {
         using namespace geode::utils;
         geode::async::runtime().spawn([]() -> arc::Future<> {
             auto res = co_await web::WebRequest()
-                .get("https://raw.githubusercontent.com/EclipseMenu/translations/refs/heads/metadata/metadata.json");
+                .get("https://git.eclipse.menu/EclipseMenu/translations/raw/branch/metadata/metadata.json");
 
             if (!res.ok()) {
                 co_return;
