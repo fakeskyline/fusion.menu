@@ -88,10 +88,10 @@ namespace eclipse::i18n {
         this->setProgress(static_cast<float>(m_filesDownloaded) / m_totalFiles);
 
         auto ext = BitmapFontsExtensions[m_filesDownloaded];
-        auto path = geode::Mod::get()->getConfigDir().toStdPath() / "bmfonts" / GEODE_MOD_ID / fmt::format("font_{}{}", m_charset, ext);
+        auto path = std::filesystem::path(geode::Mod::get()->getConfigDir().string()) / "bmfonts" / GEODE_MOD_ID / fmt::format("font_{}{}", m_charset, ext);
 
         auto url = fmt::format(
-            "https://raw.githubusercontent.com/EclipseMenu/EclipseMenu/refs/heads/main/resources/BitmapFonts/{}",
+            "https://git.eclipse.menu/EclipseMenu/EclipseMenu/raw/branch/main/resources/BitmapFonts/{}",
             path.filename()
         );
         this->startDownloadFile(std::move(path), std::move(url));
