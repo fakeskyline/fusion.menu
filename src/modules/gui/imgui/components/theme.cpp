@@ -1,6 +1,7 @@
 #include "theme.hpp"
 
 #include <imgui-cocos.hpp>
+#include <asp/fs/std.hpp>
 #include <imgui_internal.h>
 #include <misc/cpp/imgui_stdlib.h>
 #include <modules/config/config.hpp>
@@ -303,10 +304,10 @@ namespace eclipse::gui::imgui {
         auto title = i18n::get(combo->getTitle());
 
         ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x * (title.empty() ? .9f : .5f));
-        if (ImGui::BeginCombo(fmt::format("##{}", title).c_str(), value.empty() ? "None" : geode::utils::string::pathToString(value.filename().stem()).c_str())) {
+        if (ImGui::BeginCombo(fmt::format("##{}", title).c_str(), value.empty() ? "None" : std::string(asp::fs::Path::fromStdPath(value.filename()).stem().value_or("")).c_str())) {
             ImGui::InputText("##search", combo->getSearchBuffer());
             for (int n = 0; n < items.size(); n++) {
-                std::string option = geode::utils::string::pathToString(items[n].filename().stem());
+                std::string option = std::string(asp::fs::Path::fromStdPath(items[n].filename()).stem().value_or(""));
                 if(option.find(*combo->getSearchBuffer()) != std::string::npos) {
                     bool const is_selected = (value == items[n]);
                     if (ImGui::Selectable(option.c_str(), is_selected)) {
