@@ -44,9 +44,6 @@ class $modify(ClearCacheGMHook, GameManager) {
         GameManager::reloadAllStep5();
         utils::purgeAllSingletons();
         gui::blur::cleanup();
-        #ifdef ECLIPSE_USE_FLOATING_BUTTON
-        gui::FloatingButton::get()->reloadSprite();
-        #endif
     }
 };
 
