@@ -5,8 +5,8 @@ A **next-generation** mod menu for Geometry Dash, forked from Eclipse Menu.
 ## Compatibility
 
 - Geometry Dash: **2.2091**
-- Geode SDK: **6.0.0-alpha.1**
-- Status: experimental developer build
+- Geode SDK: **6.0.0-beta.1**
+- Status: experimental beta build
 
 Geode v6 is an alpha release. Runtime compatibility and feature behavior must be validated on the target game before this fork can be considered stable.
 

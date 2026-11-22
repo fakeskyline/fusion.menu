@@ -6,7 +6,7 @@
 
 Fusion is an open-source Geometry Dash mod menu based on [Eclipse Menu](https://github.com/EclipseMenu/EclipseMenu). It retains the upstream feature set and architecture while developing under the Fusion name.
 
-> **Compatibility status:** The 2.2091 port targets the Geode v6.0.0-alpha.1 SDK. Geode v6 is an experimental developer release, so this branch is experimental too. A successful build does not by itself guarantee runtime stability.
+> **Compatibility status:** The 2.2091 port targets the Geode v6.0.0-beta.1 SDK. Geode v6 is a pre-release beta, so this branch is experimental too. A successful build does not by itself guarantee runtime stability.
 
 ## Features
 
