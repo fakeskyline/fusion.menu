@@ -1,6 +1,8 @@
 #pragma once
 
 #include <functional.hpp>
+#include <filesystem>
+#include <type_traits>
 #include <string>
 #include <vector>
 #include <matjson.hpp>
@@ -76,7 +78,10 @@ namespace eclipse::config {
     /// @param value Value to set.
     template<typename T>
     void set(std::string_view key, T value) {
-        getStorage().set(key, std::move(value));
+        if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>)
+            getStorage().set(key, value.string());
+        else
+            getStorage().set(key, std::move(value));
         executeCallbacks(key);
     }
 
@@ -170,7 +175,10 @@ namespace eclipse::config {
     /// @param value Value to set.
     template<typename T>
     void setTemp(std::string_view key, T value) {
-        getTempStorage().set(key, std::move(value));
+        if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>)
+            getTempStorage().set(key, value.string());
+        else
+            getTempStorage().set(key, std::move(value));
         executeTempCallbacks(key);
     }
 
