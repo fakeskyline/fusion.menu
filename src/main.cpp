@@ -1,5 +1,6 @@
 #include <Geode/loader/Setting.hpp>
 #include <asp/fs/std.hpp>
+#include <Geode/ui/OverlayManager.hpp>
 #include <Geode/modify/CCScheduler.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/MenuLayer.hpp>
@@ -357,4 +358,14 @@ $on_mod(Loaded) {
             style == "ImGui" ? gui::RendererType::ImGui : gui::RendererType::Cocos2d
         );
     });
+}
+
+$on_game(TexturesLoaded) {
+#ifdef ECLIPSE_USE_FLOATING_BUTTON
+    auto* button = gui::FloatingButton::get();
+    if (button && !button->getParent()) {
+        geode::OverlayManager::get()->addChild(button);
+        button->reloadSprite();
+    }
+#endif
 }

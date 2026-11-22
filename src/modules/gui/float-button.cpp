@@ -8,7 +8,11 @@ using namespace cocos2d;
 
 namespace eclipse::gui {
     FloatingButton* FloatingButton::get() {
-        static FloatingButton* instance = create();
+        static FloatingButton* instance = [] {
+            auto* button = create();
+            if (button) button->retain();
+            return button;
+        }();
         return instance;
     }
 
