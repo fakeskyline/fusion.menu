@@ -1,5 +1,6 @@
 #include "manager.hpp"
 #include <filesystem>
+#include <asp/fs/std.hpp>
 #include <modules/config/config.hpp>
 #include <modules/gui/imgui/imgui.hpp>
 #include <Geode/Loader.hpp>
@@ -16,9 +17,9 @@ namespace eclipse::gui {
 
     int getDefaultThemeIndex(std::vector<ThemeMeta> const& themes) {
         #ifdef GEODE_IS_DESKTOP
-        static auto defaultPath = geode::Mod::get()->getResourcesDir() / "megaoverlay.json";
+        static auto defaultPath = geode::Mod::get()->getResourcesDir().toStdPath().toStdPath() / "megaoverlay.json";
         #else
-        static auto defaultPath = geode::Mod::get()->getResourcesDir() / "catppuccinmacchiato.json";
+        static auto defaultPath = geode::Mod::get()->getResourcesDir().toStdPath().toStdPath() / "catppuccinmacchiato.json";
         #endif
         for (auto i = 0; i < themes.size(); i++) {
             if (themes[i].path == defaultPath) return i;
@@ -27,7 +28,7 @@ namespace eclipse::gui {
     }
 
     ThemeManager::ThemeManager() {
-        if (!loadTheme(geode::Mod::get()->getSaveDir() / "theme.json")) {
+        if (!loadTheme(geode::Mod::get()->getSaveDir().toStdPath() / "theme.json")) {
             // theme not created, load a built-in one
             auto themes = listAvailableThemes();
             if (themes.empty()) {
@@ -195,7 +196,7 @@ namespace eclipse::gui {
     }
 
     void ThemeManager::saveTheme() const {
-        saveTheme(geode::Mod::get()->getSaveDir() / "theme.json");
+        saveTheme(geode::Mod::get()->getSaveDir().toStdPath() / "theme.json");
     }
 
     void ThemeManager::applyValues(matjson::Value& json, bool flatten) const {
@@ -324,8 +325,8 @@ namespace eclipse::gui {
             }
         };
 
-        globThemes(geode::Mod::get()->getResourcesDir());
-        globThemes(geode::Mod::get()->getConfigDir() / "themes");
+        globThemes(geode::Mod::get()->getResourcesDir().toStdPath());
+        globThemes(geode::Mod::get()->getConfigDir().toStdPath() / "themes");
 
         return themes;
     }

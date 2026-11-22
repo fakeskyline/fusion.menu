@@ -1,6 +1,7 @@
 #include "translations.hpp"
 
 #include <Geode/utils/web.hpp>
+#include <asp/fs/std.hpp>
 #include <modules/config/config.hpp>
 #include <modules/labels/setting.hpp>
 #include <utils.hpp>
@@ -159,8 +160,8 @@ namespace eclipse::i18n {
     }
 
     std::vector<LanguageMetadata> fetchAvailableLanguages() {
-        static auto langsPath = geode::Mod::get()->getSaveDir() / "languages";
-        static auto fallbackPath = geode::Mod::get()->getResourcesDir();
+        static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
+        static auto fallbackPath = geode::Mod::get()->getResourcesDir().toStdPath();
 
         std::vector<LanguageMetadata> result;
         auto globLangs = [&](std::filesystem::path const& path) {
@@ -199,7 +200,7 @@ namespace eclipse::i18n {
     bool hasBitmapFont(std::string_view font) {
         if (font == "default") return true;
 
-        static auto fontsPath = geode::Mod::get()->getConfigDir() / "bmfonts" / GEODE_MOD_ID;
+        static auto fontsPath = geode::Mod::get()->getConfigDir().toStdPath() / "bmfonts" / GEODE_MOD_ID;
         std::error_code ec;
         if (!std::filesystem::exists(fontsPath, ec))
             return false;
@@ -211,7 +212,7 @@ namespace eclipse::i18n {
     }
 
     void downloadLanguage(std::string code) {
-        static auto langsPath = geode::Mod::get()->getSaveDir() / "languages";
+        static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
 
         using namespace geode::utils;
         geode::async::runtime().spawn([](std::string code) -> arc::Future<> {
@@ -269,7 +270,7 @@ namespace eclipse::i18n {
         if (lastCheck <= ECLIPSE_TRANSLATION_TIMESTAMP) {
             // remove local languages (since they are outdated)
             geode::log::info("Removing outdated languages...");
-            static auto langsPath = geode::Mod::get()->getSaveDir() / "languages";
+            static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
             std::error_code ec;
             std::filesystem::remove_all(langsPath, ec);
             if (ec) {

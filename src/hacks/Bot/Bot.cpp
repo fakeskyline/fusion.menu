@@ -1,4 +1,5 @@
 #include <modules.hpp>
+#include <asp/fs/std.hpp>
 #include <modules/bot/bot.hpp>
 #include <modules/config/config.hpp>
 #include <modules/gui/gui.hpp>
@@ -34,7 +35,7 @@ namespace eclipse::hacks::Bot {
                 if (!result)
                     return;
 
-                auto replaysDir = Mod::get()->getSaveDir() / "replays";
+                auto replaysDir = Mod::get()->getSaveDir().toStdPath() / "replays";
                 auto replayPath = replaysDir / (name + ".gdr2");
 
                 std::error_code ec;
@@ -68,7 +69,7 @@ namespace eclipse::hacks::Bot {
     }
 
     void saveReplay() {
-        std::filesystem::path replayDirectory = Mod::get()->getSaveDir() / "replays";
+        std::filesystem::path replayDirectory = Mod::get()->getSaveDir().toStdPath() / "replays";
 
         std::error_code ec;
         if (!std::filesystem::exists(replayDirectory, ec)) {
@@ -203,7 +204,7 @@ namespace eclipse::hacks::Bot {
         );
     }
     void openReplaysFolder() {
-        auto replaysDir = Mod::get()->getSaveDir() / "replays";
+        auto replaysDir = Mod::get()->getSaveDir().toStdPath() / "replays";
         std::error_code ec;
         
         // create the folder if it doesn't exist
@@ -284,7 +285,7 @@ namespace eclipse::hacks::Bot {
             tab->addRadioButton("bot.record", "bot.state", 1)->callback(updateBotState)->handleKeybinds();
             tab->addRadioButton("bot.playback", "bot.state", 2)->callback(updateBotState)->handleKeybinds();
 
-            tab->addFilesystemCombo("bot.replays", "bot.selectedreplay", Mod::get()->getSaveDir() / "replays");
+            tab->addFilesystemCombo("bot.replays", "bot.selectedreplay", Mod::get()->getSaveDir().toStdPath() / "replays");
 #ifdef GEODE_IS_WINDOWS
             tab->addCombo("bot.practice-fix-mode", {"Checkpoint", "Memory"}, 0)->setDescription();
 #endif

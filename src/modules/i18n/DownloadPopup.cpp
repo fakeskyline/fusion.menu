@@ -1,4 +1,5 @@
 #include "DownloadPopup.hpp"
+#include <asp/fs/std.hpp>
 
 #include <modules/gui/cocos/nodes/FallbackBMFont.hpp>
 #include "translations.hpp"
@@ -87,7 +88,7 @@ namespace eclipse::i18n {
         this->setProgress(static_cast<float>(m_filesDownloaded) / m_totalFiles);
 
         auto ext = BitmapFontsExtensions[m_filesDownloaded];
-        auto path = geode::Mod::get()->getConfigDir() / "bmfonts" / GEODE_MOD_ID / fmt::format("font_{}{}", m_charset, ext);
+        auto path = geode::Mod::get()->getConfigDir().toStdPath() / "bmfonts" / GEODE_MOD_ID / fmt::format("font_{}{}", m_charset, ext);
 
         auto url = fmt::format(
             "https://raw.githubusercontent.com/EclipseMenu/EclipseMenu/refs/heads/main/resources/BitmapFonts/{}",

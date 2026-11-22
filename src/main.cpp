@@ -1,4 +1,5 @@
 #include <Geode/loader/Setting.hpp>
+#include <asp/fs/std.hpp>
 #include <Geode/modify/CCScheduler.hpp>
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/MenuLayer.hpp>
@@ -138,7 +139,7 @@ $on_mod(Loaded) {
     gui::ThemeManager::get();
 
     // Add bitmap fonts to texture search path
-    auto bmfontPath = geode::Mod::get()->getConfigDir() / "bmfonts";
+    auto bmfontPath = geode::Mod::get()->getConfigDir().toStdPath() / "bmfonts";
     std::error_code ec;
     std::filesystem::create_directories(bmfontPath / GEODE_MOD_ID, ec);
     if (ec) {

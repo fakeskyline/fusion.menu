@@ -1,6 +1,7 @@
 #include "config.hpp"
 
 #include <fstream>
+#include <asp/fs/std.hpp>
 #include <Geode/loader/Log.hpp>
 #include <Geode/loader/Mod.hpp>
 
@@ -27,7 +28,7 @@ namespace eclipse::config {
 
     matjson::Value& getStorage() {
         static matjson::Value storage = [] {
-            auto res = geode::utils::file::readJson(geode::Mod::get()->getSaveDir() / "config.json");
+            auto res = geode::utils::file::readJson(geode::Mod::get()->getSaveDir().toStdPath() / "config.json");
             if (!res) {
                 geode::log::warn("Failed to read config file: {}, creating a new one.", res.unwrapErr());
                 return matjson::Value::object();
@@ -99,7 +100,7 @@ namespace eclipse::config {
 
     void load() {
         // Unused now
-        // auto path = geode::Mod::get()->getSaveDir() / "config.json";
+        // auto path = geode::Mod::get()->getSaveDir().toStdPath() / "config.json";
         // if (!loadFile(path)) {
         //     geode::log::warn("Failed to load config file, creating a new one.");
         //     getStorage() = nlohmann::json::object();
@@ -117,12 +118,12 @@ namespace eclipse::config {
     }
 
     void save() {
-        auto path = geode::Mod::get()->getSaveDir() / "config.json";
+        auto path = geode::Mod::get()->getSaveDir().toStdPath() / "config.json";
         saveFile(path);
     }
 
     void saveProfile(std::string_view profile) {
-        auto profilesDir = geode::Mod::get()->getSaveDir() / "profiles";
+        auto profilesDir = geode::Mod::get()->getSaveDir().toStdPath() / "profiles";
 
         std::error_code ec;
         std::filesystem::create_directories(profilesDir, ec);
@@ -136,7 +137,7 @@ namespace eclipse::config {
     }
 
     void loadProfile(std::string_view profile) {
-        auto profilesDir = geode::Mod::get()->getSaveDir() / "profiles";
+        auto profilesDir = geode::Mod::get()->getSaveDir().toStdPath() / "profiles";
         auto path = profilesDir / fmt::format("{}.json", profile);
         if (!loadFile(path)) {
             geode::log::warn("Failed to load profile: {}", profile);
@@ -145,7 +146,7 @@ namespace eclipse::config {
     }
 
     void deleteProfile(std::string_view profile) {
-        auto profilesDir = geode::Mod::get()->getSaveDir() / "profiles";
+        auto profilesDir = geode::Mod::get()->getSaveDir().toStdPath() / "profiles";
         auto path = profilesDir / fmt::format("{}.json", profile);
 
         std::error_code ec;
@@ -159,7 +160,7 @@ namespace eclipse::config {
 
     std::vector<std::string> getProfiles() {
         std::vector<std::string> profiles;
-        auto profilesDir = geode::Mod::get()->getSaveDir() / "profiles";
+        auto profilesDir = geode::Mod::get()->getSaveDir().toStdPath() / "profiles";
         std::error_code ec;
         if (!std::filesystem::exists(profilesDir, ec)) {
             return profiles;
