@@ -1,4 +1,5 @@
 #include <modules/config/config.hpp>
+#include <asp/fs/std.hpp>
 #include <modules/gui/gui.hpp>
 #include <modules/gui/components/button.hpp>
 #include <modules/gui/components/combo.hpp>
@@ -418,7 +419,7 @@ namespace eclipse::hacks::Labels {
 
                         auto path = std::move(pathOpt).value();
                         std::error_code ec;
-                        if (!std::filesystem::exists(path, ec)) return;
+                        if (!std::filesystem::exists(path.toStdPath(), ec)) return;
 
                         gui::Engine::queueAfterDrawing([this, path = std::move(path)] {
                             auto res = geode::utils::file::readFromJson<labels::LabelSettings>(path);

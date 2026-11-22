@@ -178,8 +178,8 @@ namespace eclipse::gui::imgui {
             }
         };
 
-        globFonts(geode::Mod::get()->getResourcesDir());
-        globFonts(geode::Mod::get()->getConfigDir() / "fonts");
+        globFonts(geode::Mod::get()->getResourcesDir().toStdPath());
+        globFonts(geode::Mod::get()->getConfigDir().toStdPath() / "fonts");
 
         return result;
     }

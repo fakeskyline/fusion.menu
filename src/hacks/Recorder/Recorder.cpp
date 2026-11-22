@@ -1,4 +1,5 @@
 #include <modules/config/config.hpp>
+#include <asp/fs/std.hpp>
 #include <modules/gui/gui.hpp>
 #include <modules/gui/components/button.hpp>
 #include <modules/gui/components/combo.hpp>
@@ -127,7 +128,7 @@ namespace eclipse::hacks::Recorder {
         std::erase(trimmedLevelName, '\\');
         trimString(trimmedLevelName);
 
-        std::filesystem::path renderDirectory = geode::Mod::get()->getSaveDir() / "renders" / STR(trimmedLevelName);
+        std::filesystem::path renderDirectory = geode::Mod::get()->getSaveDir().toStdPath() / "renders" / STR(trimmedLevelName);
 
         std::error_code ec;
         if (!std::filesystem::exists(renderDirectory, ec)) {
