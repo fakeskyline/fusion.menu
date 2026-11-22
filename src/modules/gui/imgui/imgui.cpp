@@ -171,7 +171,7 @@ namespace eclipse::gui::imgui {
             for (auto& entry : std::filesystem::directory_iterator(path, ec)) {
                 if (entry.path().extension() != ".ttf") continue;
                 auto filename = asp::fs::Path::fromStdPath(entry.path()).stem().value_or("");
-                FontMetadata font{filename, entry.path()};
+                FontMetadata font{std::string(filename), entry.path()};
                 result.push_back(font);
             }
             if (ec) {
