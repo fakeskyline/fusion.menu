@@ -81,7 +81,7 @@ namespace eclipse::i18n {
 
         if (it == langs.end()) return;
 
-        auto res = geode::utils::file::readJson(it->path);
+        auto res = geode::utils::file::readJson(asp::fs::Path::fromStdPath(it->path));
         if (res.isErr()) return;
 
         auto res2 = res.unwrap().as<Map>();
@@ -141,7 +141,7 @@ namespace eclipse::i18n {
     }
 
     std::optional<LanguageMetadata> getLanguageName(std::filesystem::path const& path) {
-        auto res = geode::utils::file::readJson(path);
+        auto res = geode::utils::file::readJson(asp::fs::Path::fromStdPath(path));
         if (res.isErr()) return std::nullopt;
         auto json = res.unwrap();
 
@@ -236,7 +236,7 @@ namespace eclipse::i18n {
             }
 
             auto path = langsPath / fmt::format("{}.lang.json", code);
-            auto writeRes = res.into(path);
+            auto writeRes = res.into(asp::fs::Path::fromStdPath(path));
             if (writeRes.isErr()) {
                 geode::log::warn("Failed to save language file: {}", path);
                 co_return;
@@ -270,7 +270,7 @@ namespace eclipse::i18n {
         if (lastCheck <= ECLIPSE_TRANSLATION_TIMESTAMP) {
             // remove local languages (since they are outdated)
             geode::log::info("Removing outdated languages...");
-            static auto langsPath = geode::Mod::get()->getSaveDir().toStdPath() / "languages";
+            static auto langsPath = std::filesystem::path(geode::Mod::get()->getSaveDir().string()) / "languages";
             std::error_code ec;
             std::filesystem::remove_all(langsPath, ec);
             if (ec) {
