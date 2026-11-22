@@ -67,7 +67,7 @@ namespace eclipse::i18n {
                     return;
                 }
 
-                auto res = response.into(path);
+                auto res = response.into(asp::fs::Path::fromStdPath(path));
                 if (res.isErr()) {
                     this->handleError(-1);
                     return;
