@@ -10,7 +10,7 @@
 namespace eclipse::gui {
     static auto IMPORT_PICK_OPTIONS = geode::utils::file::FilePickOptions{
         std::nullopt, {{
-            "Eclipse Themes",
+            "Fusion Themes",
             {"*.zip"}
         }}
     };

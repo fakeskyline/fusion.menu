@@ -75,7 +75,7 @@ jobs:
           with open("changelog.md", "r", encoding="utf-8") as f:
             changelog = f.read()
 
-          pattern = rf"(?m)^## {re.escape(version)}\\n(.*?)(?=^## |\\Z)"
+          pattern = rf"(?m)^## {re.escape(version)}\n(.*?)(?=^## |\Z)"
           match = re.search(pattern, changelog, re.DOTALL)
           if not match:
             print(f"::error::Changelog entry for '{version}' not found.")
@@ -85,7 +85,7 @@ jobs:
           section = re.sub(r"<c[a-zA-Z]>", "**", section)
           section = re.sub(r"</c>", "**", section)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
-            f.write(f"changelog<<__CHANGELOG_EOF__\\n{section}\\n__CHANGELOG_EOF__\\n")
+            f.write(f"changelog<<__CHANGELOG_EOF__\n{section}\n__CHANGELOG_EOF__\n")
           EOF
 
       - name: Create GitHub release

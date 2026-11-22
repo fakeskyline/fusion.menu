@@ -50,7 +50,7 @@ class $modify(ClearCacheGMHook, GameManager) {
     }
 };
 
-class $modify(EclipseButtonMLHook, MenuLayer) {
+class $modify(FusionButtonMLHook, MenuLayer) {
     bool init() override {
         if (!MenuLayer::init()) return false;
 
@@ -59,7 +59,7 @@ class $modify(EclipseButtonMLHook, MenuLayer) {
         //     auto menu = this->getChildByID("bottom-menu");
         //     auto rendererSwitchButton = CCMenuItemSpriteExtra::create(
         //         cocos2d::CCSprite::createWithSpriteFrameName("GJ_editModeBtn_001.png"),
-        //         this, menu_selector(EclipseButtonMLHook::onToggleRenderer)
+        //         this, menu_selector(FusionButtonMLHook::onToggleRenderer)
         //     );
         //     rendererSwitchButton->setID("render-switch"_spr);
         //     menu->addChild(rendererSwitchButton);
