@@ -84,11 +84,10 @@ namespace eclipse::labels {
                 auto pathOpt = std::move(res).unwrap();
                 if (!pathOpt) return;
 
-                auto path = std::move(*pathOpt).toStdPath();
-                if (path.extension() != ".ecl") path.replace_extension(".ecl");
+                auto path = std::move(*pathOpt);
+                if (path.extension().value_or("") != "ecl") path.replaceExtension("ecl");
 
-                auto geodePath = asp::fs::Path::fromStdPath(path);
-                auto res2 = geode::utils::file::writeToJson(geodePath, *this);
+                auto res2 = geode::utils::file::writeToJson(path, *this);
                 if (res2.isErr()) {
                     geode::log::error("Failed to save label file: {}", res2.unwrapErr());
                 }
