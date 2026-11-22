@@ -23,7 +23,11 @@ endif()
 CPMAddPackage("gh:matcool/gd-imgui-cocos#9764333")
 CPMAddPackage("gh:prevter/msgpack-for-matjson#16a7957")
 CPMAddPackage("gh:maxnut/GDR-converter#71104a9")
-CPMAddPackage("gh:EclipseMenu/rift@2.0.2")
+CPMAddPackage(
+    NAME rift
+    GIT_REPOSITORY https://git.eclipse.menu/EclipseMenu/RIFT
+    GIT_TAG v2.0.2
+)
 CPMAddPackage("gh:prevter/AdvancedLabel#7e0eff9")
 CPMAddPackage("gh:prevter/sinaps#7d2f7b1")
 
