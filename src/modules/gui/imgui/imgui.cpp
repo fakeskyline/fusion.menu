@@ -170,7 +170,7 @@ namespace eclipse::gui::imgui {
             }
             for (auto& entry : std::filesystem::directory_iterator(path, ec)) {
                 if (entry.path().extension() != ".ttf") continue;
-                auto filename = geode::utils::string::pathToString(entry.path().stem());
+                auto filename = asp::fs::Path::fromStdPath(entry.path()).stem().value_or("");
                 FontMetadata font{filename, entry.path()};
                 result.push_back(font);
             }
@@ -179,8 +179,8 @@ namespace eclipse::gui::imgui {
             }
         };
 
-        globFonts(geode::Mod::get()->getResourcesDir().toStdPath());
-        globFonts(geode::Mod::get()->getConfigDir().toStdPath() / "fonts");
+        globFonts(std::filesystem::path(geode::Mod::get()->getResourcesDir().string()));
+        globFonts(std::filesystem::path(geode::Mod::get()->getConfigDir().string()) / "fonts");
 
         return result;
     }
