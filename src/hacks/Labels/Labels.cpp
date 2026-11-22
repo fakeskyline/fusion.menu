@@ -404,7 +404,7 @@ namespace eclipse::hacks::Labels {
                });
             tab->addButton("labels.import")->callback([this] {
                 geode::utils::file::FilePickOptions::Filter filter;
-                filter.description = "Eclipse Label (*.ecl)";
+                filter.description = "Fusion Label (*.ecl)";
                 filter.files.insert("*.ecl");
 
                 geode::async::spawn(
