@@ -1,4 +1,5 @@
 #include "variables.hpp"
+#include <unordered_map>
 #include <utils.hpp>
 #include <modules/config/config.hpp>
 #include <modules/utils/SingletonCache.hpp>
