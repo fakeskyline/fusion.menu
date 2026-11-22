@@ -17,9 +17,9 @@ namespace eclipse::gui {
 
     int getDefaultThemeIndex(std::vector<ThemeMeta> const& themes) {
         #ifdef GEODE_IS_DESKTOP
-        static auto defaultPath = geode::Mod::get()->getResourcesDir().toStdPath().toStdPath() / "megaoverlay.json";
+        static auto defaultPath = std::filesystem::path(geode::Mod::get()->getResourcesDir().string()) / "megaoverlay.json";
         #else
-        static auto defaultPath = geode::Mod::get()->getResourcesDir().toStdPath().toStdPath() / "catppuccinmacchiato.json";
+        static auto defaultPath = std::filesystem::path(geode::Mod::get()->getResourcesDir().string()).toStdPath() / "catppuccinmacchiato.json";
         #endif
         for (auto i = 0; i < themes.size(); i++) {
             if (themes[i].path == defaultPath) return i;
@@ -28,7 +28,7 @@ namespace eclipse::gui {
     }
 
     ThemeManager::ThemeManager() {
-        if (!loadTheme(geode::Mod::get()->getSaveDir().toStdPath() / "theme.json")) {
+        if (!loadTheme(std::filesystem::path(geode::Mod::get()->getSaveDir().string()) / "theme.json")) {
             // theme not created, load a built-in one
             auto themes = listAvailableThemes();
             if (themes.empty()) {
@@ -100,7 +100,7 @@ namespace eclipse::gui {
     }
 
     bool ThemeManager::loadTheme(std::filesystem::path const& path) {
-        auto res = geode::utils::file::readJson(path);
+        auto res = geode::utils::file::readJson(asp::fs::Path::fromStdPath(path));
         if (res.isErr()) {
             geode::log::error("Failed to read theme file: {}", res.unwrapErr());
             return false;
@@ -189,7 +189,7 @@ namespace eclipse::gui {
         matjson::Value json = matjson::Value::object();
         this->applyValues(json);
 
-        auto res = geode::utils::file::writeString(path, json.dump());
+        auto res = geode::utils::file::writeString(asp::fs::Path::fromStdPath(path), json.dump());
         if (res.isErr()) {
             geode::log::error("Failed to save theme file: {}", res.unwrapErr());
         }
@@ -326,7 +326,7 @@ namespace eclipse::gui {
         };
 
         globThemes(geode::Mod::get()->getResourcesDir().toStdPath());
-        globThemes(geode::Mod::get()->getConfigDir().toStdPath() / "themes");
+        globThemes(std::filesystem::path(geode::Mod::get()->getConfigDir().string()) / "themes");
 
         return themes;
     }
