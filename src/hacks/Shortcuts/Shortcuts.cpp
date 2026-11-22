@@ -177,7 +177,7 @@ namespace eclipse::hacks::Shortcuts {
                     geode::utils::file::PickMode::OpenFile,
                     {geode::dirs::getGameDir(), {filter}}
                 ),
-                [](geode::Result<std::optional<std::filesystem::path>> res) {
+                [](geode::utils::file::PickResult res) {
                     auto pickedPath = std::move(res).unwrapOrDefault();
                     if (!pickedPath) return;
                     auto path = pickedPath->toStdPath();
