@@ -98,7 +98,7 @@ namespace eclipse::i18n {
 
         if (it == langs.end()) return false;
 
-        auto res = geode::utils::file::readJson(it->path);
+        auto res = geode::utils::file::readJson(asp::fs::Path::fromStdPath(it->path));
         if (res.isErr()) return false;
         auto map = res.unwrap().as<Map>();
         if (map.isErr()) return false;
