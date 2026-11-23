@@ -78,10 +78,7 @@ namespace eclipse::config {
     /// @param value Value to set.
     template<typename T>
     void set(std::string_view key, T value) {
-        if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>)
-            getStorage().set(key, value.string());
-        else
-            getStorage().set(key, std::move(value));
+        getStorage().set(key, matjson::Value(value));
         executeCallbacks(key);
     }
 
@@ -175,10 +172,7 @@ namespace eclipse::config {
     /// @param value Value to set.
     template<typename T>
     void setTemp(std::string_view key, T value) {
-        if constexpr (std::is_same_v<std::remove_cvref_t<T>, std::filesystem::path>)
-            getTempStorage().set(key, value.string());
-        else
-            getTempStorage().set(key, std::move(value));
+        getTempStorage().set(key, matjson::Value(value));
         executeTempCallbacks(key);
     }
 
