@@ -35,7 +35,7 @@ namespace eclipse::hacks::Bot {
                 if (!result)
                     return;
 
-                auto replaysDir = Mod::get()->getSaveDir().toStdPath() / "replays";
+                auto replaysDir = Mod::get()->getSaveDir().toStdPath().unwrapOrDefault() / "replays";
                 auto replayPath = replaysDir / (name + ".gdr2");
 
                 std::error_code ec;
@@ -87,7 +87,7 @@ namespace eclipse::hacks::Bot {
         if (std::filesystem::exists(replayPath, ec)) {
             return Popup::create(
                 i18n::get_("common.warning"),
-                i18n::format("bot.overwrite", string::pathToString(replayPath.filename().stem())),
+                i18n::format("bot.overwrite", replayPath.stem().string()),
                 i18n::get_("common.yes"),
                 i18n::get_("common.no"),
                 [&](bool result) {
@@ -172,7 +172,7 @@ namespace eclipse::hacks::Bot {
                 i18n::get_("bot.delete-invalid.msg")
             );
         }
-        auto replayName = string::pathToString(replayPath.filename().stem());
+        auto replayName = replayPath.stem().string();
         Popup::create(
             i18n::get_("common.warning"),
             i18n::format("bot.confirm-delete", replayName),
@@ -218,7 +218,7 @@ namespace eclipse::hacks::Bot {
             }
         }
         
-        geode::utils::file::openFolder(replaysDir);
+        geode::utils::file::openFolder(asp::fs::Path::fromStdPath(replaysDir));
     }
 
     class $hack(Bot) {
@@ -285,7 +285,7 @@ namespace eclipse::hacks::Bot {
             tab->addRadioButton("bot.record", "bot.state", 1)->callback(updateBotState)->handleKeybinds();
             tab->addRadioButton("bot.playback", "bot.state", 2)->callback(updateBotState)->handleKeybinds();
 
-            tab->addFilesystemCombo("bot.replays", "bot.selectedreplay", Mod::get()->getSaveDir().toStdPath() / "replays");
+            tab->addFilesystemCombo("bot.replays", "bot.selectedreplay", Mod::get()->getSaveDir().toStdPath().unwrapOrDefault() / "replays");
 #ifdef GEODE_IS_WINDOWS
             tab->addCombo("bot.practice-fix-mode", {"Checkpoint", "Memory"}, 0)->setDescription();
 #endif
@@ -312,7 +312,7 @@ namespace eclipse::hacks::Bot {
 
     class $modify(BotPLHook, PlayLayer) {
         bool init(GJGameLevel* gj, bool p1, bool p2) {
-            bool result = PlayLayer::init(gj, p1, p2);
+            bool result = PlayLayer::init(gj, p1);
             s_bot.setLevelInfo(gdr::Level(gj->m_levelName, gj->m_levelID.value()));
             s_bot.setPlatformer(gj->isPlatformer());
             // s_respawning = false;
