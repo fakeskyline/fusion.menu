@@ -70,7 +70,7 @@ namespace eclipse::gui::cocos {
 
         void update(float) override {
             // do not allow input if the close button is selected
-            if (m_closeBtn->m_bSelected) {
+            if (m_closeBtn->isSelected()) {
                 m_ignoreInput = true;
                 return;
             }
