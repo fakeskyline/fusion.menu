@@ -19,7 +19,7 @@ namespace eclipse::gui {
         #ifdef GEODE_IS_DESKTOP
         static auto defaultPath = std::filesystem::path(geode::Mod::get()->getResourcesDir().string()) / "megaoverlay.json";
         #else
-        static auto defaultPath = std::filesystem::path(geode::Mod::get()->getResourcesDir().string()).toStdPath() / "catppuccinmacchiato.json";
+        static auto defaultPath = geode::Mod::get()->getResourcesDir().toStdPath().unwrapOrDefault() / "catppuccinmacchiato.json";
         #endif
         for (auto i = 0; i < themes.size(); i++) {
             if (themes[i].path == defaultPath) return i;
@@ -196,7 +196,7 @@ namespace eclipse::gui {
     }
 
     void ThemeManager::saveTheme() const {
-        saveTheme(geode::Mod::get()->getSaveDir().toStdPath() / "theme.json");
+        saveTheme(geode::Mod::get()->getSaveDir().toStdPath().unwrapOrDefault() / "theme.json");
     }
 
     void ThemeManager::applyValues(matjson::Value& json, bool flatten) const {
@@ -293,7 +293,7 @@ namespace eclipse::gui {
     }
 
     std::optional<ThemeMeta> ThemeManager::checkTheme(std::filesystem::path const& path) {
-        auto res = geode::utils::file::readJson(path);
+        auto res = geode::utils::file::readJson(asp::fs::Path::fromStdPath(path));
         if (res.isErr()) {
             return std::nullopt;
         }
@@ -325,7 +325,7 @@ namespace eclipse::gui {
             }
         };
 
-        globThemes(geode::Mod::get()->getResourcesDir().toStdPath());
+        globThemes(geode::Mod::get()->getResourcesDir().toStdPath().unwrapOrDefault());
         globThemes(std::filesystem::path(geode::Mod::get()->getConfigDir().string()) / "themes");
 
         return themes;
