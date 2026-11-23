@@ -56,7 +56,7 @@ namespace eclipse::hacks::Bot {
                     return;
                 }
 
-                config::set("bot.selectedreplay", replayPath);
+                config::set("bot.selectedreplay", replayPath.string());
 
                 // refresh cocos ui page
                 if (auto cocos = gui::cocos::CocosRenderer::get())
@@ -82,7 +82,7 @@ namespace eclipse::hacks::Bot {
             }
         }
 
-        auto replayPath = config::get<std::filesystem::path>("bot.selectedreplay", "temp");
+        auto replayPath = std::filesystem::path(config::get<std::string>("bot.selectedreplay", "temp"));
 
         if (std::filesystem::exists(replayPath, ec)) {
             return Popup::create(
@@ -109,7 +109,7 @@ namespace eclipse::hacks::Bot {
                         )
                     );
 
-                    config::set("bot.selectedreplay", confirmReplayDirectory);
+                    config::set("bot.selectedreplay", confirmReplayDirectory.string());
                 }
             );
         }
